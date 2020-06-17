@@ -10,7 +10,9 @@ import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Autocomplete } from "../components";
+import { Autocomplete, TextFieldWidgetDateRange } from "../components";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 
 function Copyright() {
     return (
@@ -60,6 +62,22 @@ export default function Home() {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <Autocomplete />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <TextFieldWidgetDateRange
+                            value={[]}
+                            name="period"
+                            emptyLabel={clearRangeState}
+                            labeltext="Período Inasistencia"
+                            register={register}
+                            errors={errors.period}
+                            placeholder="Seleccione rango de fechas"
+                            format="dd/MM/yyyy"
+                            onChange={(values) => {
+                                setBeginRangeState(values.begin);
+                                setEndRangeState(values.end);
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
                     <Button
                         type="submit"
                         fullWidth
