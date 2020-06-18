@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Link from "@material-ui/core/Link";
@@ -49,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
     const classes = useStyles();
+    const [clearRangeState, setClearRangeState] = useState(false);
+    const [beginRangeState, setBeginRangeState] = useState(false);
+    const [endRangeState, setEndRangeState] = useState(false);
+    const { handleSubmit, register, errors, getValues, reset } = useForm();
 
     return (
         <Container component="main" maxWidth="xs">
