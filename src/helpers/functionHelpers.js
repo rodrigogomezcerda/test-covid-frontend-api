@@ -2,11 +2,7 @@ import { useMediaQuery } from "@material-ui/core";
 import esLocale from "date-fns/locale/es";
 import { format } from "date-fns";
 
-<<<<<<< HEAD
-export default IsDesktopHandler = (size) => {
-=======
 const IsDesktopHandler = (size) => {
->>>>>>> 9b5fb64f28bc29ae436c76e160f3a031eb9e288c
     let media = null;
 
     switch (size) {
