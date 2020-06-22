@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import esLocale from "date-fns/locale/es";
 import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
-import { useUtils } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker, useUtils } from "@material-ui/pickers";
 // import withStyles from "@material-ui/core/styles/withStyles";
 import clsx from "clsx";
 import { IsDesktopHandler } from "../../../helpers";
@@ -67,22 +66,22 @@ const TextFieldWidgetDateRange = (props) => {
     }, [errors]);
 
     useEffect(() => {
-        //Only way to get to this state is is openForward is used
+        // Only way to get to this state is is openForward is used
         if (isOpen && accepted && !prevBegin && !prevEnd) {
             setAccepted(false);
             setPrevBegin(begin);
             setPrevEnd(end);
             return;
         }
-        //Closed without accepting, reset to prev state, don't find onChange
+        // Closed without accepting, reset to prev state, don't find onChange
         if (!isOpen && !accepted) {
             setBegin(prevBegin);
             setEnd(prevEnd);
             setHover(undefined);
             setHasClicked(false);
         }
-        //Auto ok and hasn't been accepted, but has all the items set, accept and close.
-        //This will also triger the on change event by setting isOpen to false
+        // Auto ok and hasn't been accepted, but has all the items set, accept and close.
+        // This will also triger the on change event by setting isOpen to false
         if (isOpen && autoOk && !accepted && begin && end && hasClicked) {
             setAccepted(true);
             onClose ? onClose() : setOpen(false);
@@ -208,9 +207,8 @@ const TextFieldWidgetDateRange = (props) => {
                         if (!isOpen) {
                             if (date && begin && end && !emptyLabel) {
                                 return `${formatDate(begin)} - ${formatDate(end)}`;
-                            } else {
-                                return "";
                             }
+                            return "";
                         }
                     }}
                     // labelFunc={(date, invalid) =>

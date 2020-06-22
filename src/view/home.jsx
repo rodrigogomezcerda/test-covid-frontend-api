@@ -3,17 +3,15 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useForm } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Autocomplete, TextFieldWidgetDateRange } from "../components";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { Autocomplete, TextFieldWidgetDateRange } from "../components";
 
 function Copyright() {
     return (
