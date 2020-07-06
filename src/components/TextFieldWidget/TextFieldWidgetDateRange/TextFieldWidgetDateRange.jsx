@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import esLocale from "date-fns/locale/es";
+import esLocale from "date-fns/locale/en-US";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker, useUtils } from "@material-ui/pickers";
 // import withStyles from "@material-ui/core/styles/withStyles";
@@ -154,14 +154,13 @@ const TextFieldWidgetDateRange = (props) => {
     let labelText = null;
     const isDesktop = IsDesktopHandler("sm");
     if (!isDesktop) {
-        labelText = labeltext;
+        labelText = null;
     } else {
         labelText = null;
     }
 
     return (
         <div className={classes.inputContainerStyle}>
-            <div className={classes.labelDesktopStyle}>{labeltext}</div>
             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esLocaleDate}>
                 <DatePicker
                     {...others}

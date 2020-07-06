@@ -18,7 +18,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                WE
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -73,7 +73,7 @@ export default function Home() {
                             labeltext="Período Inasistencia"
                             register={register}
                             errors={errors.period}
-                            placeholder="Seleccione rango de fechas"
+                            placeholder="Select date"
                             format="dd/MM/yyyy"
                             onChange={(values) => {
                                 setBeginRangeState(values.begin);
