@@ -1,3 +1,41 @@
 .App {
-  text-align: center;
+    text-align: center;
+    background-image: url("./assets/img/map-image.png");
+    background-color: #4ea0ae;
+    display: flex;
+    background-position: center center;
+    background-size: cover;
 }
+
+.container {
+    padding-top: 2%;
+}
+.avatar {
+    padding-left: 40%;
+    padding-right: 50%;
+    padding-bottom: 3%;
+}
+
+.color {
+    color: #303f9f !important;
+}
+
+.color-circle {
+    background: rgb(255, 255, 255, 0.4) !important;
+    width: 190% !important;
+    height: 67px !important;
+}
+
+.tipography {
+    margin-bottom: 2%;
+}
+
+form {
+    padding: 1% 10% 1%;
+}
+
+.form-item {
+    margin-bottom: 5%;
+}
+
+/* 28-07-1916 */

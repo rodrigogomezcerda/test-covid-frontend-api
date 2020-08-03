@@ -32,34 +32,49 @@ export default function Home() {
     const { handleSubmit, register, errors, getValues, reset } = useForm();
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" className="container">
             <CssBaseline />
             <div>
-                <Avatar>
-                    <LocalHospitalIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Covid-19
-                </Typography>
+                <div className="avatar">
+                    <Avatar className="color-circle">
+                        <LocalHospitalIcon fontSize="large" className="color" />
+                    </Avatar>
+                </div>
+                <div className="tipography">
+                    <Typography component="h1" variant="h5">
+                        Covid-19
+                    </Typography>
+                </div>
                 <form noValidate>
-                    <Autocomplete />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <TextFieldWidgetDateRange
-                            value={[]}
-                            name="period"
-                            emptyLabel={clearRangeState}
-                            labeltext="Período Inasistencia"
-                            register={register}
-                            errors={errors.period}
-                            placeholder="Select date"
-                            format="dd/MM/yyyy"
-                            onChange={(values) => {
-                                setBeginRangeState(values.begin);
-                                setEndRangeState(values.end);
-                            }}
-                        />
-                    </MuiPickersUtilsProvider>
-                    <Button type="submit" fullWidth variant="contained" color="primary">
+                    <div className="form-item">
+                        <Autocomplete className="item" />
+                    </div>
+                    <div className="form-item">
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <TextFieldWidgetDateRange
+                                value={[]}
+                                name="period"
+                                emptyLabel={clearRangeState}
+                                labeltext="Período Inasistencia"
+                                register={register}
+                                errors={errors.period}
+                                placeholder="Select date"
+                                format="dd/MM/yyyy"
+                                onChange={(values) => {
+                                    setBeginRangeState(values.begin);
+                                    setEndRangeState(values.end);
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </div>
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className="form-item"
+                    >
                         Search
                     </Button>
                 </form>
