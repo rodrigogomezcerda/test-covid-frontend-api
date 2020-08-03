@@ -47,7 +47,7 @@ export default function Home() {
                 </div>
                 <form noValidate>
                     <div className="form-item">
-                        <Autocomplete className="item" />
+                        <Autocomplete />
                     </div>
                     <div className="form-item">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
