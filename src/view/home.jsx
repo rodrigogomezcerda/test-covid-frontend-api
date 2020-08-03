@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { Autocomplete, TextFieldWidgetDateRange } from "../components";
+import { Autocomplete, TextFieldWidgetDateRange, Graphic } from "../components";
 
 function Copyright() {
     return (
@@ -77,6 +77,7 @@ export default function Home() {
                     >
                         Search
                     </Button>
+                    <Graphic />
                 </form>
             </div>
             <Box mt={8}>
