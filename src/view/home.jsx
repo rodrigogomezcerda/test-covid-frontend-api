@@ -67,20 +67,15 @@ export default function Home() {
                             />
                         </MuiPickersUtilsProvider>
                     </div>
-
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className="form-item"
-                    >
-                        Search
-                    </Button>
-                    <Graphic />
+                    <div className="form-item">
+                        <Button type="submit" fullWidth variant="contained" color="primary">
+                            Search
+                        </Button>
+                    </div>
                 </form>
+                <Graphic />
             </div>
-            <Box mt={8}>
+            <Box mt={1}>
                 <Copyright />
             </Box>
         </Container>

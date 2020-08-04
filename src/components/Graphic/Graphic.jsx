@@ -3,6 +3,9 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 const options = {
+    chart: {
+        height: (3 / 4) * 100 + "%",
+    },
     title: {
         text: "Gráfico",
     },
