@@ -1,16 +1,57 @@
 /* eslint-disable no-use-before-define */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import errorMessage from "../../common/errorMessages.json";
 
-export default function ComboBox() {
+export default function ComboBox(props) {
+    const { register, require, errors } = props;
+
+    console.log("props: ", props);
+    const [stateMessage, setStateMessage] = useState("");
+    const [stateError, setStateError] = useState(false);
+    useEffect(() => {
+        if (errors) {
+            console.log(errors, "error del doc");
+            switch (errors.type) {
+                case "required":
+                    setStateMessage(
+                        errorMessage.message[errors.ref.name].required
+                            ? errorMessage.message[errors.ref.name].required
+                            : errorMessage.message[errors.ref.name],
+                    );
+                    break;
+                case "minLength":
+                    setStateMessage(errorMessage.message[errors.ref.name].minLength);
+                    break;
+                default:
+                    break;
+            }
+            setStateError(true);
+        } else {
+            setStateMessage("");
+            setStateError(false);
+        }
+    }, [errors]);
+
     return (
         <Autocomplete
             id="combo-box-demo"
             options={top100Films}
             getOptionLabel={(option) => option.title}
             // style={{ width: 325 }}
-            renderInput={(params) => <TextField {...params} label="Countries" variant="outlined" />}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    label="Countries"
+                    variant="outlined"
+                    inputRef={register({
+                        required: require,
+                    })}
+                    error={stateError}
+                    helperText={stateMessage}
+                />
+            )}
         />
     );
 }

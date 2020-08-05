@@ -30,6 +30,7 @@ export default function Home() {
     const [beginRangeState, setBeginRangeState] = useState(false);
     const [endRangeState, setEndRangeState] = useState(false);
     const { handleSubmit, register, errors, getValues, reset } = useForm();
+    const onSubmit = (data) => console.log(data);
 
     return (
         <Container component="main" maxWidth="xs" className="container">
@@ -45,9 +46,14 @@ export default function Home() {
                         Covid-19
                     </Typography>
                 </div>
-                <form noValidate>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-item">
-                        <Autocomplete />
+                        <Autocomplete
+                            name="country"
+                            register={register}
+                            require={true}
+                            errors={errors.country}
+                        />
                     </div>
                     <div className="form-item">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>

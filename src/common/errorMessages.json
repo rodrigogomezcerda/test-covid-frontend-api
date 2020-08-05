@@ -1,5 +1,6 @@
 {
     "message": {
-        "dateRange": "Seleccione rango de fecha"
+        "dateRange": "Seleccione rango de fecha",
+        "country": "Ingrese pais."
     }
 }
