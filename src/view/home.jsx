@@ -61,8 +61,8 @@ export default function Home() {
                                 name="period"
                                 emptyLabel={clearRangeState}
                                 labeltext="Período Inasistencia"
-                                register={register}
                                 errors={errors.period}
+                                control={control}
                                 placeholder="Select date"
                                 format="dd/MM/yyyy"
                                 onChange={(values) => {

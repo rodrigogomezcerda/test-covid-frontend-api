@@ -7,9 +7,11 @@ import clsx from "clsx";
 import { IsDesktopHandler } from "../../../helpers";
 import classes from "./TextFieldWidgetDateRange.module.scss";
 import errorMessage from "../../../common/errorMessages.json";
+import { Controller } from "react-hook-form";
 
 const TextFieldWidgetDateRange = (props) => {
     const {
+        control,
         errors,
         register,
         // classes,
@@ -162,68 +164,72 @@ const TextFieldWidgetDateRange = (props) => {
     return (
         <div className={classes.inputContainerStyle}>
             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esLocaleDate}>
-                <DatePicker
-                    {...others}
-                    label={labelText}
-                    variant="outlined"
-                    inputVariant="outlined"
-                    fullWidth
-                    margin="dense"
-                    value={begin}
-                    renderDay={renderDay}
-                    open={isOpen}
-                    inputRef={register({
-                        required: errorMessage.message[props.name],
-                    })}
-                    error={stateError}
-                    helperText={stateMessage}
-                    onOpen={() => {
-                        setAccepted(false);
-                        setPrevBegin(begin);
-                        setPrevEnd(end);
-                        onOpen ? onOpen() : setOpen(true);
-                    }}
-                    onAccept={() => {
-                        if (!begin || !end) {
-                            if (hover && utils.isBeforeDay(begin, hover)) {
-                                setEnd(hover);
-                            } else {
-                                setEnd(begin);
-                                setBegin(hover);
-                            }
-                        }
-                        setPrevBegin(undefined);
-                        setPrevEnd(undefined);
-                        // if (!autoOk) {
-                        setAccepted(true);
-                        // }
-                    }}
-                    onClose={() => {
-                        onClose ? onClose() : setOpen(false);
-                    }}
-                    onChange={() => {}}
-                    labelFunc={(date, invalid) => {
-                        if (!isOpen) {
-                            if (date && begin && end && !emptyLabel) {
-                                return `${formatDate(begin)} - ${formatDate(end)}`;
-                            }
-                            return "";
-                        }
-                    }}
-                    // labelFunc={(date, invalid) =>
-                    // 	!isOpen
-                    // 		? labelFunc
-                    // 			? labelFunc([begin, end], invalid)
-                    // 			: date && begin && end
-                    // 			? `${formatDate(begin)} - ${formatDate(end)}`
-                    // 			: emptyLabel || ""
-                    // 		: prevBegin && prevEnd
-                    // 		? labelFunc
-                    // 			? labelFunc([prevBegin, prevEnd], invalid)
-                    // 			: `${formatDate(prevBegin)} - ${formatDate(prevEnd)}`
-                    // 		: emptyLabel || ""
-                    // }
-                    DialogProps={{ className: classes.dateRangePickerDialog }}
+                <Controller
+                    as={
+                        <DatePicker
+                            {...others}
+                            label={labelText}
+                            variant="outlined"
+                            inputVariant="outlined"
+                            fullWidth
+                            margin="dense"
+                            value={begin}
+                            renderDay={renderDay}
+                            open={isOpen}
+                            error={stateError}
+                            helperText={stateMessage}
+                            onOpen={() => {
+                                setAccepted(false);
+                                setPrevBegin(begin);
+                                setPrevEnd(end);
+                                onOpen ? onOpen() : setOpen(true);
+                            }}
+                            onAccept={() => {
+                                if (!begin || !end) {
+                                    if (hover && utils.isBeforeDay(begin, hover)) {
+                                        setEnd(hover);
+                                    } else {
+                                        setEnd(begin);
+                                        setBegin(hover);
+                                    }
+                                }
+                                setPrevBegin(undefined);
+                                setPrevEnd(undefined);
+                                // if (!autoOk) {
+                                setAccepted(true);
+                                // }
+                            }}
+                            onClose={() => {
+                                onClose ? onClose() : setOpen(false);
+                            }}
+                            onChange={() => {}}
+                            labelFunc={(date, invalid) => {
+                                if (!isOpen) {
+                                    if (date && begin && end && !emptyLabel) {
+                                        return `${formatDate(begin)} - ${formatDate(end)}`;
+                                    }
+                                    return "";
+                                }
+                            }}
+                            // labelFunc={(date, invalid) =>
+                            // 	!isOpen
+                            // 		? labelFunc
+                            // 			? labelFunc([begin, end], invalid)
+                            // 			: date && begin && end
+                            // 			? `${formatDate(begin)} - ${formatDate(end)}`
+                            // 			: emptyLabel || ""
+                            // 		: prevBegin && prevEnd
+                            // 		? labelFunc
+                            // 			? labelFunc([prevBegin, prevEnd], invalid)
+                            // 			: `${formatDate(prevBegin)} - ${formatDate(prevEnd)}`
+                            // 		: emptyLabel || ""
+                            // }
+                            DialogProps={{ className: classes.dateRangePickerDialog }}
+                        />
+                    }
+                    name="period"
+                    rules={{ required: true }}
+                    control={control}
                 />
             </MuiPickersUtilsProvider>
         </div>
