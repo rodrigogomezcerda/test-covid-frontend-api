@@ -24,12 +24,16 @@ function Copyright() {
         </Typography>
     );
 }
-
+const defaultValues = {
+    country: null,
+};
 export default function Home() {
     const [clearRangeState, setClearRangeState] = useState(false);
     const [beginRangeState, setBeginRangeState] = useState(false);
     const [endRangeState, setEndRangeState] = useState(false);
-    const { handleSubmit, register, errors, getValues, reset } = useForm();
+    const { handleSubmit, register, reset, control, errors } = useForm({
+        defaultValues,
+    });
     const onSubmit = (data) => console.log(data);
 
     return (
@@ -48,12 +52,7 @@ export default function Home() {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-item">
-                        <Autocomplete
-                            name="country"
-                            register={register}
-                            require={true}
-                            errors={errors.country}
-                        />
+                        <Autocomplete control={control} errors={errors.country} />
                     </div>
                     <div className="form-item">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
