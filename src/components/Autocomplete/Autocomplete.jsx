@@ -60,7 +60,7 @@ export default function ComboBox(props) {
             }
             onChange={([, data]) => data}
             name="country"
-            rules={{ required: "PRUEBA" }}
+            rules={{ required: true }}
             control={control}
             defaultValue={{ code: "AF", label: "Afghanistan", phone: "93" }}
         />
