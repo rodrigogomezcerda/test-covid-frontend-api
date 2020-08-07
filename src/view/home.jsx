@@ -12,6 +12,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { Autocomplete, TextFieldWidgetDateRange, Graphic } from "../components";
 import Services from "../services";
+import { dateFormatIso8601 } from "../helpers";
 
 function Copyright() {
     return (
@@ -29,27 +30,34 @@ const defaultValues = {
     country: null,
 };
 export default function Home() {
-    const [covid, setCovid] = useState([]);
+    const [data, setData] = useState([]);
     const [clearRangeState, setClearRangeState] = useState(false);
     const [beginRangeState, setBeginRangeState] = useState(false);
     const [endRangeState, setEndRangeState] = useState(false);
     const { handleSubmit, register, reset, control, errors } = useForm({
         defaultValues,
     });
-    const onSubmit = (data) => console.log(data);
-    useEffect(() => {
-        getCovid();
-    }, []);
-    const getCovid = () => {
-        Services.getAll()
+    const onSubmit = ({ country }) => {
+        getByCountry(country.label, beginRangeState, endRangeState);
+    };
+
+    const onChangePeriod = ({ begin, end }) => {
+        const beginFormat = dateFormatIso8601(begin);
+        const endFormat = dateFormatIso8601(end);
+        setBeginRangeState(beginFormat);
+        setEndRangeState(endFormat);
+    };
+    const getByCountry = (country, fromDate, toDate) => {
+        Services.getByCountry(country, fromDate, toDate)
             .then((response) => {
-                //setCovid(response.data);
+                setData(response.data);
                 console.log(response.data);
             })
             .catch((e) => {
                 console.log(e);
             });
     };
+
     return (
         <Container component="main" maxWidth="xs" className="container">
             <CssBaseline />
@@ -79,10 +87,7 @@ export default function Home() {
                                 control={control}
                                 placeholder="Select date"
                                 format="dd/MM/yyyy"
-                                onChange={(values) => {
-                                    setBeginRangeState(values.begin);
-                                    setEndRangeState(values.end);
-                                }}
+                                onChange={(values) => onChangePeriod(values)}
                             />
                         </MuiPickersUtilsProvider>
                     </div>

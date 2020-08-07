@@ -1,1 +1,1 @@
-export { default as IsDesktopHandler } from "./functionHelpers";
+export { IsDesktopHandler, dateFormatIso8601 } from "./functionHelpers";

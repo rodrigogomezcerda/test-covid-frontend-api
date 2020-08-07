@@ -29,4 +29,11 @@ const IsDesktopHandler = (size) => {
     return matches;
 };
 
-export default IsDesktopHandler;
+const dateFormatIso8601 = (date) => {
+    const dateFormat = new Date(date).toISOString();
+    const dateNewFormat = dateFormat.substring(0, 10);
+    const [yy, mm, dd] = dateNewFormat.split(/-/g);
+    return `${yy}-${mm}-${dd}`;
+};
+
+export { IsDesktopHandler, dateFormatIso8601 };

@@ -1,9 +1,9 @@
-import apiCovid from "../config/api";
+import api from "../config/api";
 
-const getAll = () => {
-    return apiCovid.get("/all");
+const getByCountry = (country, fromDate, toDate) => {
+    return api.get(`${country}/status/confirmed?from=${fromDate}&to=${toDate}`);
 };
 
 export default {
-    getAll,
+    getByCountry,
 };
