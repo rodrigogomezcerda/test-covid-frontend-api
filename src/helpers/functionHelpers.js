@@ -36,4 +36,11 @@ const dateFormatIso8601 = (date) => {
     return `${yy}-${mm}-${dd}`;
 };
 
-export { IsDesktopHandler, dateFormatIso8601 };
+const dateFormatIso8601Chort = (date) => {
+    const dateFormat = new Date(date).toISOString();
+    const dateNewFormat = dateFormat.substring(0, 10);
+    const [yy, mm, dd] = dateNewFormat.split(/-/g);
+    return `${dd}-${mm}`;
+};
+
+export { IsDesktopHandler, dateFormatIso8601, dateFormatIso8601Chort };
