@@ -97,7 +97,7 @@ export default function Home() {
                         </Button>
                     </div>
                 </form>
-                <Graphic />
+                <Graphic data={data} beginRange={beginRangeState} endRange={endRangeState} />
             </div>
             <Box mt={1}>
                 <Copyright />
