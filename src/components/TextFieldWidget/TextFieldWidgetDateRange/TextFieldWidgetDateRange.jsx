@@ -4,7 +4,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker, useUtils } from "@material-ui/pickers";
 // import withStyles from "@material-ui/core/styles/withStyles";
 import clsx from "clsx";
-import { IsDesktopHandler } from "../../../helpers";
+import { IsDesktopHandler, dateFormatIso8601 } from "../../../helpers";
 import classes from "./TextFieldWidgetDateRange.module.scss";
 import errorMessage from "../../../common/errorMessages.json";
 import { Controller } from "react-hook-form";
@@ -46,6 +46,11 @@ const TextFieldWidgetDateRange = (props) => {
     const [open, setOpen] = useState(false);
 
     const isOpen = openForward !== undefined ? openForward : open;
+
+    var tomorrow = new Date(Date.now() + 24 * 59 * 59 * 1000);
+    let tomorrowExample = dateFormatIso8601(tomorrow);
+    console.log("prueba: ", tomorrowExample);
+    // let tomorrowExample = tomorrow.toISOString();
 
     useEffect(() => {
         if (errors) {
@@ -225,6 +230,7 @@ const TextFieldWidgetDateRange = (props) => {
                             // 		: emptyLabel || ""
                             // }
                             DialogProps={{ className: classes.dateRangePickerDialog }}
+                            maxDate={tomorrow}
                         />
                     }
                     name="period"
