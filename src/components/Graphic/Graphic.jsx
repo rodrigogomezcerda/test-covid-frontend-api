@@ -5,11 +5,8 @@ import { dateFormatIso8601Chort } from "../../helpers";
 
 const Graphic = (props) => {
     const { data, beginRange, endRange } = props;
-    const arrayData = data.map(({ Cases, Date }) => {
-        const dateFormat = dateFormatIso8601Chort(Date);
-        return { Cases, dateFormat };
-    });
-
+    const arrayDate = data.map(({ Date }) => dateFormatIso8601Chort(Date));
+    const arrayCases = data.map(({ Cases }) => Cases);
     const options = {
         chart: {
             height: (3 / 4) * 100 + "%",
@@ -19,7 +16,7 @@ const Graphic = (props) => {
             text: "Gráfico",
         },
         xAxis: {
-            categories: ["01/08", "02/08", "03/08", "04/08", "05/08", "06/08"],
+            categories: arrayDate,
         },
         yAxis: {
             title: {
@@ -37,10 +34,11 @@ const Graphic = (props) => {
         series: [
             {
                 name: "",
-                data: [980, 600, 900, 750, 350, 920],
+                data: arrayCases,
             },
         ],
     };
+    console.log(options, "ATR");
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={options} />
