@@ -2,6 +2,7 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { dateFormatIso8601Chort } from "../../helpers";
+import classes from "./Graphic.module.scss";
 
 const Graphic = (props) => {
     const { data, beginRange, endRange } = props;
@@ -9,7 +10,7 @@ const Graphic = (props) => {
     const arrayCases = data.map(({ Cases }) => Cases);
     const options = {
         chart: {
-            height: (3 / 4) * 100 + "%",
+            height: "90%",
             type: "line",
         },
         title: {
@@ -40,7 +41,7 @@ const Graphic = (props) => {
     };
     console.log(options, "ATR");
     return (
-        <div>
+        <div className={classes.containerGraphic}>
             <HighchartsReact highcharts={Highcharts} options={options} />
         </div>
     );

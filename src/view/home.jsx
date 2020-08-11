@@ -35,18 +35,17 @@ const defaultValues = {
     country: null,
 };
 export default function Home() {
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
-    const [clearRangeState, setClearRangeState] = useState(false);
+    const [clearRangeState] = useState(false);
     const [beginRangeState, setBeginRangeState] = useState(false);
     const [endRangeState, setEndRangeState] = useState(false);
-    const { handleSubmit, register, reset, control, errors } = useForm({
+    const { handleSubmit, control, errors } = useForm({
         defaultValues,
     });
     const onSubmit = ({ country }) => {
         getByCountry(country.label, beginRangeState, endRangeState);
     };
-
-    console.log("DATA: ", data);
 
     const onChangePeriod = ({ begin, end }) => {
         const beginFormat = dateFormatIso8601(begin);
@@ -57,10 +56,12 @@ export default function Home() {
     const getByCountry = (country, fromDate, toDate) => {
         Services.getByCountry(country, fromDate, toDate)
             .then((response) => {
+                setLoading(true);
                 setData(response.data);
                 console.log(response.data);
             })
             .catch((e) => {
+                setLoading(false);
                 console.log(e);
             });
     };
@@ -109,9 +110,11 @@ export default function Home() {
                 {data && data.length !== 0 ? (
                     <Graphic data={data} />
                 ) : (
-                    <div className="form-item">
-                        <CircularProgressComponent />
-                    </div>
+                    loading && (
+                        <div className="form-item">
+                            <CircularProgressComponent />
+                        </div>
+                    )
                 )}
             </div>
             <Box mt={1}>
