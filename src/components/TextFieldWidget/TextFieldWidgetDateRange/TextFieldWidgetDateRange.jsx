@@ -231,9 +231,6 @@ const TextFieldWidgetDateRange = (props) => {
                             // 		: emptyLabel || ""
                             // }
                             DialogProps={{ className: classes.dateRangePickerDialog }}
-                            minDate=""
-                            maxDate={tomorrow}
-                            maxDateMessage="jajjaj"
                         />
                     }
                     name="period"

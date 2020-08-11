@@ -10,7 +10,12 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { Autocomplete, TextFieldWidgetDateRange, Graphic } from "../components";
+import {
+    Autocomplete,
+    TextFieldWidgetDateRange,
+    Graphic,
+    CircularProgressComponent,
+} from "../components";
 import Services from "../services";
 import { dateFormatIso8601 } from "../helpers";
 
@@ -40,6 +45,8 @@ export default function Home() {
     const onSubmit = ({ country }) => {
         getByCountry(country.label, beginRangeState, endRangeState);
     };
+
+    console.log("DATA: ", data);
 
     const onChangePeriod = ({ begin, end }) => {
         const beginFormat = dateFormatIso8601(begin);
@@ -98,7 +105,14 @@ export default function Home() {
                     </div>
                 </form>
 
-                {data && <Graphic data={data} />}
+                {/* {data && data.length !== 0 ? <Graphic data={data} /> : <p>Ingrese datos</p>} */}
+                {data && data.length !== 0 ? (
+                    <Graphic data={data} />
+                ) : (
+                    <div className="form-item">
+                        <CircularProgressComponent />
+                    </div>
+                )}
             </div>
             <Box mt={1}>
                 <Copyright />
