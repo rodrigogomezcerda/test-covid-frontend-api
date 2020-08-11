@@ -47,11 +47,6 @@ const TextFieldWidgetDateRange = (props) => {
 
     const isOpen = openForward !== undefined ? openForward : open;
 
-    var tomorrow = new Date(Date.now() + 24 * 59 * 59 * 1000);
-    let tomorrowExample = dateFormatIso8601(tomorrow);
-    console.log("prueba: ", tomorrowExample);
-    // let tomorrowExample = tomorrow.toISOString();
-
     useEffect(() => {
         if (errors) {
             switch (errors.type) {
@@ -158,6 +153,12 @@ const TextFieldWidgetDateRange = (props) => {
 
     const formatDate = (date) => utils.format(date, format || utils.dateFormat);
 
+    var tomorrow = new Date(Date.now() + 24 * 59 * 59 * 1000);
+    let hoy = new Date();
+
+    console.log("EXAMPLE FORMAT: ", dateFormatIso8601(tomorrow));
+    let today = dateFormatIso8601(hoy);
+
     let labelText = null;
     const isDesktop = IsDesktopHandler("sm");
     if (!isDesktop) {
@@ -230,7 +231,9 @@ const TextFieldWidgetDateRange = (props) => {
                             // 		: emptyLabel || ""
                             // }
                             DialogProps={{ className: classes.dateRangePickerDialog }}
+                            minDate=""
                             maxDate={tomorrow}
+                            maxDateMessage="jajjaj"
                         />
                     }
                     name="period"
