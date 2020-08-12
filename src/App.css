@@ -10,7 +10,7 @@
     min-height: 100%;
     min-width: 100%;
 
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -38,7 +38,10 @@
 }
 
 form {
+    display: flex;
+    flex-direction: column;
     padding: 1% 10% 1%;
+    width: 70%;
 }
 
 .form-item {

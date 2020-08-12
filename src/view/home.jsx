@@ -21,7 +21,7 @@ import { dateFormatIso8601 } from "../helpers";
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant="body2" color="textSecondary">
             {"Copyright © "}
             <Link color="inherit" href="https://material-ui.com/">
                 WE
@@ -36,29 +36,48 @@ const defaultValues = {
 };
 export default function Home() {
     const [loading, setLoading] = useState(false);
+    const [validDate, setValidDate] = useState(false);
     const [data, setData] = useState([]);
     const [clearRangeState] = useState(false);
-    const [beginRangeState, setBeginRangeState] = useState(false);
-    const [endRangeState, setEndRangeState] = useState(false);
+    const [beginRangeState, setBeginRangeState] = useState({
+        date: "",
+        dateFormat: "",
+    });
+    const [endRangeState, setEndRangeState] = useState({
+        date: "",
+        dateFormat: "",
+    });
     const { handleSubmit, control, errors } = useForm({
         defaultValues,
     });
     const onSubmit = ({ country }) => {
-        getByCountry(country.label, beginRangeState, endRangeState);
+        const currentDate = new Date();
+        if (endRangeState.date < currentDate) {
+            getByCountry(country.label, beginRangeState.dateFormat, endRangeState.dateFormat);
+            setValidDate(false);
+        } else {
+            setValidDate(true);
+            setData([]);
+        }
     };
 
     const onChangePeriod = ({ begin, end }) => {
         const beginFormat = dateFormatIso8601(begin);
         const endFormat = dateFormatIso8601(end);
-        setBeginRangeState(beginFormat);
-        setEndRangeState(endFormat);
+        setBeginRangeState({
+            date: begin,
+            dateFormat: beginFormat,
+        });
+        setEndRangeState({
+            date: end,
+            dateFormat: endFormat,
+        });
     };
     const getByCountry = (country, fromDate, toDate) => {
         Services.getByCountry(country, fromDate, toDate)
             .then((response) => {
                 setLoading(true);
                 setData(response.data);
-                console.log(response.data);
             })
             .catch((e) => {
                 setLoading(false);
@@ -67,7 +86,7 @@ export default function Home() {
     };
 
     return (
-        <Container component="main" maxWidth="xs" className="container">
+        <Container component="main" className="container">
             <CssBaseline />
             <div>
                 <div className="avatar">
@@ -116,6 +135,7 @@ export default function Home() {
                         </div>
                     )
                 )}
+                {validDate && <p>Invalid Date - Max date is today</p>}
             </div>
             <Box mt={1}>
                 <Copyright />
