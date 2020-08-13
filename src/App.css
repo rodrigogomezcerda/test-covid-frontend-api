@@ -6,21 +6,20 @@
     background-position: center center;
     position: fixed;
     background-size: cover;
-
     min-height: 100%;
     min-width: 100%;
-
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
 
 .container {
+    margin: 0% 25% 0%;
     padding-top: 1%;
 }
+
 .avatar {
-    padding-left: 40%;
-    padding-right: 50%;
-    padding-bottom: 2%;
+    padding-left: 47%;
+    padding-bottom: 1%;
 }
 
 .color {
@@ -29,23 +28,23 @@
 
 .color-circle {
     background: rgb(255, 255, 255, 0.4) !important;
-    width: 190% !important;
-    height: 67px !important;
+    /* height: 60px !important; */
+    padding: 6% !important;
 }
 
 .tipography {
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    padding: 1% 10% 1%;
-    width: 70%;
+    /* width: 30%;
+    margin: 0% 35% 0%; */
+    width: 35%;
+    margin: 0% 33% 0%;
 }
 
 .form-item {
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 /* .graphic {
@@ -55,16 +54,35 @@ form {
     position: relative;
     padding-bottom: 62.5%;
 }
-
 .graphic-item {
     position: absolute;
     width: 100%;
     height: 100%;
 } */
 
-/* @media (max-width: 430px) {
-    .graphic-item {
-        height: 300px;
-        width: 400px;
+@media (max-width: 490px) {
+    form {
+        width: 50%;
+        margin: 0% 25% 0%;
     }
-} */
+    .color-circle {
+        padding: 13% !important;
+    }
+    .avatar {
+        padding-left: 42%;
+    }
+}
+
+@media (min-width: 491px) and (max-width: 1100px) {
+    form {
+        width: 35%;
+        margin: 0% 32% 0%;
+    }
+    .color-circle {
+        /* height: 79px !important; */
+        padding: 6% !important;
+    }
+    .avatar {
+        padding-left: 46%;
+    }
+}

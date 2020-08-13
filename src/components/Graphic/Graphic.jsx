@@ -10,7 +10,7 @@ const Graphic = (props) => {
     const arrayCases = data.map(({ Cases }) => Cases);
     const options = {
         chart: {
-            height: "90%",
+            height: "20%",
             type: "line",
         },
         title: {
