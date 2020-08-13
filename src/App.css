@@ -4,12 +4,12 @@
     background-color: #2edfd6;
     display: flex;
     background-position: center center;
-    position: fixed;
+    position: absolute;
     background-size: cover;
     min-height: 100%;
     min-width: 100%;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .container {
@@ -28,7 +28,6 @@
 
 .color-circle {
     background: rgb(255, 255, 255, 0.4) !important;
-    /* height: 60px !important; */
     padding: 6% !important;
 }
 
@@ -37,8 +36,6 @@
 }
 
 form {
-    /* width: 30%;
-    margin: 0% 35% 0%; */
     width: 35%;
     margin: 0% 33% 0%;
 }
@@ -46,19 +43,6 @@ form {
 .form-item {
     margin-bottom: 2%;
 }
-
-/* .graphic {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-    padding-bottom: 62.5%;
-}
-.graphic-item {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-} */
 
 @media (max-width: 490px) {
     form {
@@ -79,7 +63,6 @@ form {
         margin: 0% 32% 0%;
     }
     .color-circle {
-        /* height: 79px !important; */
         padding: 6% !important;
     }
     .avatar {

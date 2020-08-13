@@ -50,6 +50,7 @@ export default function Home() {
     const { handleSubmit, control, errors } = useForm({
         defaultValues,
     });
+
     const onSubmit = ({ country }) => {
         const currentDate = new Date();
         if (endRangeState.date < currentDate) {
@@ -78,10 +79,10 @@ export default function Home() {
             .then((response) => {
                 setLoading(true);
                 setData(response.data);
+                setLoading(false);
             })
             .catch((e) => {
                 setLoading(false);
-                console.log(e);
             });
     };
 
@@ -125,7 +126,6 @@ export default function Home() {
                     </div>
                 </form>
 
-                {/* {data && data.length !== 0 ? <Graphic data={data} /> : <p>Ingrese datos</p>} */}
                 {data && data.length !== 0 ? (
                     <Graphic data={data} />
                 ) : (

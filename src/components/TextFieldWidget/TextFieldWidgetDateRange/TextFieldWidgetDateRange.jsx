@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import esLocale from "date-fns/locale/en-US";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker, useUtils } from "@material-ui/pickers";
-// import withStyles from "@material-ui/core/styles/withStyles";
 import clsx from "clsx";
 import { IsDesktopHandler, dateFormatIso8601 } from "../../../helpers";
 import classes from "./TextFieldWidgetDateRange.module.scss";
@@ -14,7 +13,6 @@ const TextFieldWidgetDateRange = (props) => {
         control,
         errors,
         register,
-        // classes,
         labeltext,
         value,
         onChange,
@@ -68,22 +66,18 @@ const TextFieldWidgetDateRange = (props) => {
     }, [errors]);
 
     useEffect(() => {
-        // Only way to get to this state is is openForward is used
         if (isOpen && accepted && !prevBegin && !prevEnd) {
             setAccepted(false);
             setPrevBegin(begin);
             setPrevEnd(end);
             return;
         }
-        // Closed without accepting, reset to prev state, don't find onChange
         if (!isOpen && !accepted) {
             setBegin(prevBegin);
             setEnd(prevEnd);
             setHover(undefined);
             setHasClicked(false);
         }
-        // Auto ok and hasn't been accepted, but has all the items set, accept and close.
-        // This will also triger the on change event by setting isOpen to false
         if (isOpen && autoOk && !accepted && begin && end && hasClicked) {
             setAccepted(true);
             onClose ? onClose() : setOpen(false);
@@ -153,12 +147,6 @@ const TextFieldWidgetDateRange = (props) => {
 
     const formatDate = (date) => utils.format(date, format || utils.dateFormat);
 
-    var tomorrow = new Date(Date.now() + 24 * 59 * 59 * 1000);
-    let hoy = new Date();
-
-    console.log("EXAMPLE FORMAT: ", dateFormatIso8601(tomorrow));
-    let today = dateFormatIso8601(hoy);
-
     let labelText = null;
     const isDesktop = IsDesktopHandler("sm");
     if (!isDesktop) {
@@ -201,9 +189,7 @@ const TextFieldWidgetDateRange = (props) => {
                                 }
                                 setPrevBegin(undefined);
                                 setPrevEnd(undefined);
-                                // if (!autoOk) {
                                 setAccepted(true);
-                                // }
                             }}
                             onClose={() => {
                                 onClose ? onClose() : setOpen(false);
@@ -217,19 +203,6 @@ const TextFieldWidgetDateRange = (props) => {
                                     return "";
                                 }
                             }}
-                            // labelFunc={(date, invalid) =>
-                            // 	!isOpen
-                            // 		? labelFunc
-                            // 			? labelFunc([begin, end], invalid)
-                            // 			: date && begin && end
-                            // 			? `${formatDate(begin)} - ${formatDate(end)}`
-                            // 			: emptyLabel || ""
-                            // 		: prevBegin && prevEnd
-                            // 		? labelFunc
-                            // 			? labelFunc([prevBegin, prevEnd], invalid)
-                            // 			: `${formatDate(prevBegin)} - ${formatDate(prevEnd)}`
-                            // 		: emptyLabel || ""
-                            // }
                             DialogProps={{ className: classes.dateRangePickerDialog }}
                         />
                     }
