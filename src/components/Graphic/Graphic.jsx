@@ -6,11 +6,11 @@ import classes from "./Graphic.module.scss";
 
 const Graphic = (props) => {
     const { data } = props;
-    console.log("DATA: ", data);
     const arrayDate = data.map(({ Date }) => dateFormatIso8601Chort(Date));
     const arrayCases = data.map(({ Cases }) => Cases);
     const options = {
         chart: {
+            height: "20%",
             type: "line",
         },
         title: {

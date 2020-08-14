@@ -3,7 +3,7 @@ import esLocale from "date-fns/locale/en-US";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker, useUtils } from "@material-ui/pickers";
 import clsx from "clsx";
-import { IsDesktopHandler, dateFormatIso8601 } from "../../../helpers";
+import { IsDesktopHandler } from "../../../helpers";
 import classes from "./TextFieldWidgetDateRange.module.scss";
 import errorMessage from "../../../common/errorMessages.json";
 import { Controller } from "react-hook-form";

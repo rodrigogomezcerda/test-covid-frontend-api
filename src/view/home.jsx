@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useForm } from "react-hook-form";
-import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import Typography from "@material-ui/core/Typography";
@@ -23,9 +22,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary">
             {"Copyright © "}
-            <Link color="inherit" href="https://material-ui.com/">
-                WE
-            </Link>{" "}
+            WE
             {new Date().getFullYear()}
             {"."}
         </Typography>
