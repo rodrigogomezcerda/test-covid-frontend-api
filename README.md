@@ -18,7 +18,7 @@ This test project uses a number of open source library to work properly:
 -   [Material-Ui](https://material-ui.com/) - React UI component
 -   [HighChart](https://highcharts.com/) - HighChart
 
-This React Test are available in a [public repository](https://github.com/)
+This React Test are available in a [public repository](https://mariajosediazca.github.io/test-covid-frontend/)
 on GitHub.
 
 ### Installation
