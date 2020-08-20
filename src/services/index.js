@@ -1,7 +1,5 @@
-import { conexionApiCovid, conexionApiCountries } from "../config/api";
-
 const getByCountry = (country, fromDate, toDate) => {
-    return conexionApiCovid.get(`${country}/status/confirmed?from=${fromDate}&to=${toDate}`);
+    return `${country}/status/confirmed?from=${fromDate}&to=${toDate}`;
 };
 
 const getCountries = () => {

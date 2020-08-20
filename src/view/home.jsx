@@ -16,6 +16,8 @@ import {
     CircularProgressComponent,
 } from "../components";
 import Services from "../services";
+import useFetch from "../hooks";
+import { conexionApiCovid, conexionApiCountries } from "../config/api";
 import { dateFormatIso8601 } from "../helpers";
 
 function Copyright() {
@@ -48,6 +50,24 @@ export default function Home() {
         defaultValues,
     });
 
+    const url = Services.getByCountry("Andorra", "2020-08-02", "2020-08-05");
+    const { response, error, isLoading } = useFetch({
+        api: conexionApiCovid,
+        method: "get",
+        url: url,
+    });
+
+    /* const [
+        listSpecialitiesHandler,
+        { response, error, isLoading }
+      ] = useFetch(listSpecialities, {
+        errorPolicy: 'all',
+        fetchPolicy: 'network-only'
+      }); */
+
+    /* console.log(response);
+    console.log(isLoading); */
+
     const onSubmit = ({ country }) => {
         const currentDate = new Date();
         if (endRangeState.date < currentDate) {
@@ -72,15 +92,20 @@ export default function Home() {
         });
     };
     const getByCountry = (country, fromDate, toDate) => {
-        Services.getByCountry(country, fromDate, toDate)
-            .then((response) => {
-                setLoading(true);
-                setData(response.data);
-                setLoading(false);
-            })
-            .catch((e) => {
-                setLoading(false);
-            });
+        /* const url = Services.getByCountry(country, fromDate, toDate);
+        const { response, error, isLoading } = useFetch({
+            api: conexionApiCovid,
+            method: "get",
+            url: url,
+        }); */
+        //console.log(response, " saldra algo");
+        /* const {
+            response: responseCovid,
+            error: errorCovid,
+            isLoading: isLoadingCovid,
+        } */
+        /* setLoading(false);
+        setData(response); */
     };
 
     return (
