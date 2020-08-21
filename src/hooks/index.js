@@ -1,27 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-export default function useFetch({ api, method, url, data = null, config = null }) {
+export default function useLazyFetch({ api, method, url, immediate = false }) {
     const [response, setResponse] = useState(null);
-    const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
+
+    const execute = useCallback(
+        (urlSend) => {
+            setIsLoading(true);
+
+            const fetchData = async () => {
+                try {
+                    api[method](urlSend)
+                        .then((res) => {
+                            setResponse(res.data);
+                        })
+                        .finally(() => {
+                            setIsLoading(false);
+                        });
+                } catch (err) {
+                    setError(err);
+                    setIsLoading(false);
+                }
+            };
+
+            return fetchData();
+        },
+        [url],
+    );
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                api[method](url)
-                    .then((res) => {
-                        setResponse(res.data);
-                    })
-                    .finally(() => {
-                        setIsLoading(false);
-                    });
-            } catch (err) {
-                setError(err);
-            }
-        };
+        if (immediate) {
+            execute();
+        }
+    }, [execute, immediate]);
 
-        fetchData();
-    }, [api, method, url, data, config]);
-
-    return { response, error, isLoading };
+    return { execute, response, error, isLoading };
 }

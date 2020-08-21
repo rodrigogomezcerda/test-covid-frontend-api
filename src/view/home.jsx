@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,7 +16,7 @@ import {
     CircularProgressComponent,
 } from "../components";
 import Services from "../services";
-import useFetch from "../hooks";
+import useLazyFetch from "../hooks";
 import { conexionApiCovid, conexionApiCountries } from "../config/api";
 import { dateFormatIso8601 } from "../helpers";
 
@@ -34,9 +34,7 @@ const defaultValues = {
     country: null,
 };
 export default function Home() {
-    const [loading, setLoading] = useState(false);
     const [validDate, setValidDate] = useState(false);
-    const [data, setData] = useState([]);
     const [clearRangeState] = useState(false);
     const [beginRangeState, setBeginRangeState] = useState({
         date: "",
@@ -50,23 +48,16 @@ export default function Home() {
         defaultValues,
     });
 
-    const url = Services.getByCountry("Andorra", "2020-08-02", "2020-08-05");
-    const { response, error, isLoading } = useFetch({
+    const {
+        execute,
+        response: responseCovid,
+        error: errorCovid,
+        isLoading: isLoadingCovid,
+    } = useLazyFetch({
         api: conexionApiCovid,
         method: "get",
-        url: url,
+        url: "",
     });
-
-    /* const [
-        listSpecialitiesHandler,
-        { response, error, isLoading }
-      ] = useFetch(listSpecialities, {
-        errorPolicy: 'all',
-        fetchPolicy: 'network-only'
-      }); */
-
-    /* console.log(response);
-    console.log(isLoading); */
 
     const onSubmit = ({ country }) => {
         const currentDate = new Date();
@@ -92,20 +83,8 @@ export default function Home() {
         });
     };
     const getByCountry = (country, fromDate, toDate) => {
-        /* const url = Services.getByCountry(country, fromDate, toDate);
-        const { response, error, isLoading } = useFetch({
-            api: conexionApiCovid,
-            method: "get",
-            url: url,
-        }); */
-        //console.log(response, " saldra algo");
-        /* const {
-            response: responseCovid,
-            error: errorCovid,
-            isLoading: isLoadingCovid,
-        } */
-        /* setLoading(false);
-        setData(response); */
+        const url = Services.getByCountry(country, fromDate, toDate);
+        execute(url);
     };
 
     return (
@@ -148,10 +127,10 @@ export default function Home() {
                     </div>
                 </form>
 
-                {data && data.length !== 0 ? (
-                    <Graphic data={data} />
+                {responseCovid && responseCovid.length !== 0 ? (
+                    <Graphic data={responseCovid} />
                 ) : (
-                    loading && (
+                    isLoadingCovid && (
                         <div className="form-item">
                             <CircularProgressComponent />
                         </div>
