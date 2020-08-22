@@ -1,11 +1,12 @@
 .App {
     text-align: center;
-    background-image: url("./assets/img/map-image.png");
-    background-color: #2edfd6;
+    background: linear-gradient(rgba(201, 136, 136, 0.4), rgba(255, 255, 255, .4)), url("./assets/img/social_distancing_2g0u.svg");
+    background-color: #cffffe;
+    background-repeat: repeat-x;
     display: flex;
-    background-position: center center;
+    background-position: 100% 100%;
     position: absolute;
-    background-size: cover;
+    background-size: 47%;
     min-height: 100%;
     min-width: 100%;
     flex-direction: column;

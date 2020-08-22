@@ -6,7 +6,7 @@ import { Controller } from "react-hook-form";
 import errorMessage from "../../common/errorMessages.json";
 
 export default function ComboBox(props) {
-    const { control, errors } = props;
+    const { control, errors, countries } = props;
     const [stateMessage, setStateMessage] = useState("");
     const [stateError, setStateError] = useState(false);
     useEffect(() => {
@@ -38,10 +38,10 @@ export default function ComboBox(props) {
                 <Autocomplete
                     id="countryAutocomplete"
                     options={countries}
-                    getOptionLabel={(option) => option.label}
+                    getOptionLabel={(option) => option.name}
                     renderOption={(option) => (
                         <span>
-                            {countryToFlag(option.code)} {option.label}
+                            {countryToFlag(option.alpha2Code)} {option.name}
                         </span>
                     )}
                     renderInput={(params) => (
@@ -72,8 +72,8 @@ function countryToFlag(isoCode) {
         : isoCode;
 }
 
-const countries = [
-    { code: "AD", label: "Andorra", phone: "376" },
-    { code: "AE", label: "United Arab Emirates", phone: "971" },
-    { code: "AF", label: "Afghanistan", phone: "93" },
-];
+// const countries = [
+//     { code: "AD", label: "Andorra", phone: "376" },
+//     { code: "AE", label: "United Arab Emirates", phone: "971" },
+//     { code: "AF", label: "Afghanistan", phone: "93" },
+// ];

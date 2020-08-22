@@ -3,7 +3,7 @@ const getByCountry = (country, fromDate, toDate) => {
 };
 
 const getCountries = () => {
-    return conexionApiCountries.get(`all`);
+    return "all";
 };
 
 export default {

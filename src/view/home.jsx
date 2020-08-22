@@ -16,7 +16,7 @@ import {
     CircularProgressComponent,
 } from "../components";
 import Services from "../services";
-import useLazyFetch from "../hooks";
+import { useLazyFetch, useFetch } from "../hooks";
 import { conexionApiCovid, conexionApiCountries } from "../config/api";
 import { dateFormatIso8601 } from "../helpers";
 
@@ -59,10 +59,25 @@ export default function Home() {
         url: "",
     });
 
+    const urlCountries = Services.getCountries();
+
+    const {
+        execute: executeCountries,
+        response: responseCountries,
+        error: errorCountries,
+        isLoading: isLoadingCountries,
+    } = useFetch({
+        api: conexionApiCountries,
+        method: "get",
+        url: urlCountries,
+    });
+
+    console.log("RESPONSE ", responseCountries);
+
     const onSubmit = ({ country }) => {
         const currentDate = new Date();
         if (endRangeState.date < currentDate) {
-            getByCountry(country.label, beginRangeState.dateFormat, endRangeState.dateFormat);
+            getByCountry(country.name, beginRangeState.dateFormat, endRangeState.dateFormat);
             setValidDate(false);
         } else {
             setValidDate(true);
@@ -103,7 +118,13 @@ export default function Home() {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-item">
-                        <Autocomplete control={control} errors={errors.country} />
+                        {responseCountries && (
+                            <Autocomplete
+                                countries={responseCountries}
+                                control={control}
+                                errors={errors.country}
+                            />
+                        )}
                     </div>
                     <div className="form-item">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
