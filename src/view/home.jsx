@@ -19,6 +19,8 @@ import Services from "../services";
 import { useLazyFetch, useFetch } from "../hooks";
 import { conexionApiCovid, conexionApiCountries } from "../config/api";
 import { dateFormatIso8601 } from "../helpers";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 function Copyright() {
     return (
@@ -33,6 +35,11 @@ function Copyright() {
 const defaultValues = {
     country: null,
 };
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function Home() {
     const [validDate, setValidDate] = useState(false);
     const [clearRangeState] = useState(false);
@@ -47,6 +54,14 @@ export default function Home() {
     const { handleSubmit, control, errors } = useForm({
         defaultValues,
     });
+    const [openError, setOpenError] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpenError(false);
+    };
 
     const {
         execute,
@@ -62,7 +77,6 @@ export default function Home() {
     const urlCountries = Services.getCountries();
 
     const {
-        execute: executeCountries,
         response: responseCountries,
         error: errorCountries,
         isLoading: isLoadingCountries,
@@ -71,8 +85,6 @@ export default function Home() {
         method: "get",
         url: urlCountries,
     });
-
-    console.log("RESPONSE ", responseCountries);
 
     const onSubmit = ({ country }) => {
         const currentDate = new Date();
@@ -102,6 +114,12 @@ export default function Home() {
         execute(url);
     };
 
+    useEffect(() => {
+        if (errorCovid || errorCountries) {
+            setOpenError(true);
+        }
+    }, [errorCovid, errorCountries]);
+
     return (
         <Container component="main" className="container">
             <CssBaseline />
@@ -118,12 +136,14 @@ export default function Home() {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-item">
-                        {responseCountries && (
+                        {isLoadingCountries === false ? (
                             <Autocomplete
                                 countries={responseCountries}
                                 control={control}
                                 errors={errors.country}
                             />
+                        ) : (
+                            isLoadingCountries && <CircularProgressComponent />
                         )}
                     </div>
                     <div className="form-item">
@@ -145,6 +165,13 @@ export default function Home() {
                         <Button type="submit" fullWidth variant="contained" color="primary">
                             Search
                         </Button>
+                    </div>
+                    <div className="form-item">
+                        <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="error">
+                                ERROR API!
+                            </Alert>
+                        </Snackbar>
                     </div>
                 </form>
 

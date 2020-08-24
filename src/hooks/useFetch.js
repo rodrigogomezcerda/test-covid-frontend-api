@@ -32,6 +32,6 @@ function useFetch({ api, method, url, immediate = true }) {
         }
     }, [execute, immediate]);
 
-    return { execute, response, error, isLoading };
+    return { response, error, isLoading };
 }
 export { useFetch };
