@@ -25,8 +25,12 @@ on GitHub.
 ### Installation
 
 -   create .env file and add environment variables:
-    -REACT_APP_URL_COVID19=https://api.covid19api.com/country
-    -REACT_APP_URL_COUNTRIES=https://restcountries.eu/rest/v2
+
+```sh
+REACT_APP_URL_COVID19=https://api.covid19api.com/country
+REACT_APP_URL_COUNTRIES=https://restcountries.eu/rest/v2
+```
+
 -   install dependencias `npm install`
 
 ```sh
