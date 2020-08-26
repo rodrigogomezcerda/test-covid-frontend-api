@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/test-covid-frontend-api/static/css/main.3b155eed.chunk.css",
+    "main.js": "/test-covid-frontend-api/static/js/main.74184aed.chunk.js",
+    "main.js.map": "/test-covid-frontend-api/static/js/main.74184aed.chunk.js.map",
+    "runtime-main.js": "/test-covid-frontend-api/static/js/runtime-main.63b10350.js",
+    "runtime-main.js.map": "/test-covid-frontend-api/static/js/runtime-main.63b10350.js.map",
+    "static/js/2.3b6eb293.chunk.js": "/test-covid-frontend-api/static/js/2.3b6eb293.chunk.js",
+    "static/js/2.3b6eb293.chunk.js.map": "/test-covid-frontend-api/static/js/2.3b6eb293.chunk.js.map",
+    "index.html": "/test-covid-frontend-api/index.html",
+    "precache-manifest.058314a818637fdcab75e6e694e46da1.js": "/test-covid-frontend-api/precache-manifest.058314a818637fdcab75e6e694e46da1.js",
+    "service-worker.js": "/test-covid-frontend-api/service-worker.js",
+    "static/css/main.3b155eed.chunk.css.map": "/test-covid-frontend-api/static/css/main.3b155eed.chunk.css.map",
+    "static/js/2.3b6eb293.chunk.js.LICENSE.txt": "/test-covid-frontend-api/static/js/2.3b6eb293.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/test-covid-frontend-api/static/media/social_distancing_2g0u.567b3b9b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.63b10350.js",
+    "static/js/2.3b6eb293.chunk.js",
+    "static/css/main.3b155eed.chunk.css",
+    "static/js/main.74184aed.chunk.js"
+  ]
+}
